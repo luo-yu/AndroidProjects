@@ -1,0 +1,5 @@
+package com.hk.android.sqliteglucose.model;
+
+public class GlucoseManager {
+
+}

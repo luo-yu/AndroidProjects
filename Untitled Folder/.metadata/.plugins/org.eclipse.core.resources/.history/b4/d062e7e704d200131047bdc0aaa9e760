@@ -1,0 +1,42 @@
+package com.hk.android.sqliteglucose.model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.hk.android.sqliteglucose.db.GlucoseDBOpenHelper;
+
+public class GlucoseManager {
+	private GlucoseDBOpenHelper dbHelper;
+	private String[] GLUCOSE_TABLE_COLUMNS = { GlucoseDBOpenHelper.GLUCOSE_ID,
+			GlucoseDBOpenHelper.GLUCOSE_VALUE };
+	private SQLiteDatabase database;
+
+	public GlucoseManager(Context context) {
+		dbHelper = new GlucoseDBOpenHelper(context);
+	}
+
+	public void open() throws SQLException {
+		database = dbHelper.getWritableDatabase();
+	}
+
+	public void close() {
+		dbHelper.close();
+	}
+
+	public Glucose addGlucose(String value) {
+		ContentValues cv = new ContentValues();
+
+		cv.put(GlucoseDBOpenHelper.GLUCOSE_VALUE, value);
+
+		long glucoseId = database.insert(GlucoseDBOpenHelper.GLUCOSE, null, cv);
+
+		Cursor cursor = database.query(GlucoseDBOpenHelper.GLUCOSE,
+				GLUCOSE_TABLE_COLUMNS, GlucoseDBOpenHelper.GLUCOSE_ID, null,
+				null, null, null);
+
+	}
+
+}

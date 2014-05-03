@@ -1,0 +1,18 @@
+package com.hk.android.sqliteglucose.model;
+
+import android.database.sqlite.SQLiteDatabase;
+
+import com.hk.android.sqliteglucose.db.GlucoseDBOpenHelper;
+
+public class GlucoseManager {
+	private GlucoseDBOpenHelper dbHelper;
+	private String[] GLUCOSE_TABLE_COLUMNS ={
+		GlucoseDBOpenHelper.GLUCOSE_ID,GlucoseDBOpenHelper.GLUCOSE_VALUE	
+	};
+	private SQLiteDatabase database;
+	
+	public GlucoseManager(Context context){
+		dbHelper = new GlucoseDBOpenHelper(context);
+	}
+
+}
